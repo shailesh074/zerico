@@ -1,26 +1,381 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ------------------------------------------------------------------ *
+ *  DESIGN SYSTEM
+ *  Tokens are theme-driven CSS variables. Components never hard-code a
+ *  color — they use the semantic tokens below, so switching a business's
+ *  `theme` reskins everything without touching component code.
+ * ------------------------------------------------------------------ */
+
+/* ---- Cafe theme (warm, editorial, premium) — the launch theme ---- */
+:root,
+[data-theme="cafe"] {
+  --canvas: #f6f1e9;
+  --canvas-2: #efe7da;
+  --surface: #fffdf9;
+  --surface-2: #f4ecdf;
+  --ink: #241c15;
+  --muted: #6c6055;
+  --subtle: #9c8f80;
+  --line: #e7dccb;
+  --line-strong: #d8c9b2;
+
+  --accent: #b6551f;
+  --accent-hover: #9f4917;
+  --accent-soft: #f5e4d6;
+  --accent-ink: #fdf6ef;
+  --gold: #a6813c;
+
+  --veg: #3f8f4f;
+  --nonveg: #b23b3b;
+  --egg: #d9a441;
+
+  --shadow-color: 28 20 12;
+  --radius: 1.15rem;
 }
 
+/* ---- Modern theme (stub for Phase 5 — proves the token system) ---- */
+[data-theme="modern"] {
+  --canvas: #f7f7f8;
+  --canvas-2: #eeeef1;
+  --surface: #ffffff;
+  --surface-2: #f3f3f5;
+  --ink: #16171a;
+  --muted: #5c5f66;
+  --subtle: #9aa0a8;
+  --line: #e6e7ea;
+  --line-strong: #d5d7dc;
+
+  --accent: #1f2937;
+  --accent-hover: #0f172a;
+  --accent-soft: #eceef1;
+  --accent-ink: #ffffff;
+  --gold: #9aa0a8;
+
+  --veg: #2f9e57;
+  --nonveg: #d1453b;
+
+  --shadow-color: 10 12 16;
+  --radius: 0.6rem;
+}
+
+/* ---- Zerico theme (marketing site) — warm hospitality × premium SaaS ---- */
+[data-theme="zerico"] {
+  --canvas: #f8f3ec;
+  --canvas-2: #f0e8db;
+  --surface: #fffdfa;
+  --surface-2: #f4ede1;
+  --ink: #211a12;
+  --muted: #6a5e51;
+  --subtle: #9a8d7d;
+  --line: #e9dfce;
+  --line-strong: #dacbb3;
+
+  --accent: #b6551f;
+  --accent-hover: #9f4917;
+  --accent-soft: #f6e6d8;
+  --accent-ink: #fdf6ef;
+  --gold: #b0893c;
+
+  --veg: #3f8f4f;
+  --nonveg: #b23b3b;
+
+  --shadow-color: 28 20 12;
+  --radius: 1rem;
+}
+
+/* ---- The Cloud Cafe theme (bespoke menu site — warm, appetising) ---- */
+[data-theme="cloudcafe"] {
+  --canvas: #f6efe1;
+  --canvas-2: #efe4d0;
+  --surface: #fffdf6;
+  --surface-2: #f3e9d4;
+  --ink: #241a12;
+  --muted: #6d5f4e;
+  --subtle: #9a8b75;
+  --line: #e6d9bf;
+  --line-strong: #d8c6a3;
+
+  --accent: #a5342a;
+  --accent-hover: #8b2b22;
+  --accent-soft: #f2ddd2;
+  --accent-ink: #fdf6ef;
+  --gold: #b0863a;
+
+  --veg: #3f8f4f;
+  --nonveg: #b23b3b;
+  --egg: #cf9a34;
+
+  --shadow-color: 30 20 12;
+  --radius: 0.9rem;
+}
+
+/* ---- Map semantic tokens to Tailwind utilities (bg-*, text-*, …) ---- */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-canvas: var(--canvas);
+  --color-canvas-2: var(--canvas-2);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-ink: var(--accent-ink);
+  --color-gold: var(--gold);
+  --color-veg: var(--veg);
+  --color-nonveg: var(--nonveg);
+  --color-egg: var(--egg);
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+
+  --radius-xl: var(--radius);
+  --radius-2xl: calc(var(--radius) + 0.5rem);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ------------------------------------------------------------------ *
+ *  BASE
+ * ------------------------------------------------------------------ */
+* {
+  border-color: var(--line);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Reduce motion for users who ask for it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ *  REUSABLE PRIMITIVES
+ * ------------------------------------------------------------------ */
+
+/* Consistent page gutter used across every section */
+.container-px {
+  padding-inline: 1.25rem;
+}
+@media (min-width: 640px) {
+  .container-px {
+    padding-inline: 2rem;
+  }
+}
+@media (min-width: 1024px) {
+  .container-px {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* Section vertical rhythm */
+.section-y {
+  padding-block: 3.5rem;
+}
+@media (min-width: 768px) {
+  .section-y {
+    padding-block: 5rem;
+  }
+}
+
+/* Soft, warm-tinted elevation */
+@utility shadow-soft {
+  box-shadow:
+    0 1px 2px rgb(var(--shadow-color) / 0.04),
+    0 4px 16px rgb(var(--shadow-color) / 0.06);
+}
+
+@utility shadow-float {
+  box-shadow:
+    0 2px 6px rgb(var(--shadow-color) / 0.06),
+    0 18px 40px -12px rgb(var(--shadow-color) / 0.18);
+}
+
+/* Eyebrow / kicker label */
+@utility eyebrow {
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Subtle grain-free warm gradient wash for hero overlays */
+@utility hero-scrim {
+  background: linear-gradient(
+    to top,
+    rgb(var(--shadow-color) / 0.72) 0%,
+    rgb(var(--shadow-color) / 0.32) 42%,
+    rgb(var(--shadow-color) / 0.08) 72%,
+    transparent 100%
+  );
+}
+
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+  font-optical-sizing: auto;
+}
+
+/* The Cloud Cafe menu typography */
+.font-script {
+  font-family: var(--font-script), "Segoe Script", cursive;
+}
+.font-serif {
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+}
+
+/* Dotted leader between a menu item name and its price */
+.leader {
+  flex: 1 1 auto;
+  margin: 0 0.6rem 0.3rem;
+  border-bottom: 1.5px dotted color-mix(in oklab, var(--ink) 26%, transparent);
+}
+
+/* Thin gold rule used as a decorative divider */
+.rule-gold {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    color-mix(in oklab, var(--gold) 70%, transparent),
+    transparent
+  );
+}
+
+/* Fade/scroll reveal — driven by IntersectionObserver via .reveal + .in-view */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: none;
+}
+
+/* Slow, cinematic hero zoom */
+@keyframes hero-zoom {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+.hero-zoom {
+  animation: hero-zoom 12s ease-out forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-zoom {
+    animation: none;
+  }
+}
+
+/* Thin, elegant scrollbar for horizontal category rails */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ------------------------------------------------------------------ *
+ *  MARKETING (Zerico) — brand backgrounds & accents
+ * ------------------------------------------------------------------ */
+
+/* Warm radial gradient mesh for hero / feature backdrops */
+.mesh-warm {
+  background-color: var(--canvas);
+  background-image:
+    radial-gradient(
+      60% 55% at 12% -5%,
+      color-mix(in oklab, var(--accent) 20%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      50% 50% at 100% 0%,
+      color-mix(in oklab, var(--gold) 20%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      45% 50% at 50% 110%,
+      color-mix(in oklab, var(--accent) 10%, transparent),
+      transparent 65%
+    );
+}
+
+/* Faint blueprint grid, fades toward the edges */
+.bg-grid {
+  background-image:
+    linear-gradient(
+      to right,
+      color-mix(in oklab, var(--ink) 6%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--ink) 6%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(75% 75% at 50% 40%, #000, transparent);
+  mask-image: radial-gradient(75% 75% at 50% 40%, #000, transparent);
+}
+
+/* Warm gradient text for accent words in headlines */
+.text-gradient-brand {
+  background: linear-gradient(
+    100deg,
+    var(--accent) 0%,
+    color-mix(in oklab, var(--accent) 55%, var(--gold)) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Sheen sweep on primary CTAs */
+@keyframes cta-sheen {
+  from {
+    transform: translateX(-120%) skewX(-12deg);
+  }
+  to {
+    transform: translateX(220%) skewX(-12deg);
+  }
 }
