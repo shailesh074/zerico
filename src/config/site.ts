@@ -10,17 +10,17 @@ export const site = {
   description:
     "Zerico gives cafés, restaurants, hotels and local businesses a beautiful, mobile-first digital presence — menu, gallery, offers and more — reachable from a single QR code.",
 
-  // Primary CTA (sales-led — routes to contact, not a signup/checkout).
-  cta: { label: "Talk to us", href: "/contact" },
+  // Primary CTA (sales-led) — "Talk to us" opens a WhatsApp chat.
+  cta: { label: "Talk to us", href: "https://wa.me/919110619177" },
 
   // A real, live example customers can see.
   demo: { label: "See a live example", href: "/thecloudcafe" },
 
   contact: {
-    email: "hello@zerico.app",
-    phone: "+91 90000 00000",
-    whatsapp: "919000000000",
-    location: "Mumbai, India",
+    email: "shailesh.consult.growth@gmail.com",
+    phone: "+91 91106 19177",
+    whatsapp: "919110619177",
+    location: "Bengaluru, India",
   },
 
   social: {
@@ -41,7 +41,7 @@ export const footerNav = {
   Product: [
     { label: "Features", href: "/features" },
     { label: "Pricing", href: "/pricing" },
-    { label: "Live demo", href: "/cloudcafe" },
+    { label: "Live demo", href: "/thecloudcafe" },
     { label: "Login", href: "/login" },
   ],
   Company: [
