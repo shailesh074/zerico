@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getWebsiteBySlug } from "@/website-engine/provider";
+import { getWebsite } from "@/website-engine/getWebsite";
 import { resolvePageSections } from "@/website-engine/resolveWebsite";
 import { WebsiteRenderer } from "@/website-engine/WebsiteRenderer";
 
@@ -18,7 +18,7 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const data = getWebsiteBySlug(slug);
+  const data = await getWebsite(slug);
   if (!data || !data.business.isPublished) return { title: "Not found" };
 
   const { business } = data;
@@ -43,7 +43,7 @@ export async function generateMetadata({
 
 export default async function SitePage({ params }: PageProps) {
   const { slug, page } = await params;
-  const data = getWebsiteBySlug(slug);
+  const data = await getWebsite(slug);
 
   // Public visitors only ever see a published business.
   if (!data || !data.business.isPublished) notFound();
