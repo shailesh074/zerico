@@ -8,6 +8,9 @@
 
 export type ThemeName = "cafe" | "modern";
 
+/** Subscription tier — drives which website experience the engine generates. */
+export type Plan = "starter" | "business" | "pro";
+
 export interface DayHours {
   /** 24h "HH:MM"; ignored when `closed` is true. */
   open: string;
@@ -39,6 +42,8 @@ export interface Business {
   tagline: string;
   description: string;
   businessType: string;
+  /** Subscription plan — the engine reads this to choose the template. */
+  plan: Plan;
   theme: ThemeName;
   /** Optional per-business brand overrides layered on top of the theme. */
   primaryColor?: string;

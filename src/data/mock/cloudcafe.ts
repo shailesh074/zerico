@@ -13,6 +13,7 @@ export const cloudCafe: RestaurantData = {
     description:
       "A neighbourhood specialty coffee house in the heart of the city. We roast in small batches, bake fresh every morning, and pour every cup like it matters — because it does.",
     businessType: "Specialty Coffee & Brunch",
+    plan: "business",
     theme: "cafe",
     logoUrl: img("1495474472287-4d71bcdd2085", 200),
     coverImageUrl: img("1501339847302-ac426a4a7cbb", 1600),
